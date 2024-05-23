@@ -3,7 +3,10 @@ const http = require("http");
 // createServer = 서버를 생성하는 메서드
 // 콜백함수를 인수로 받으며, 해당 함수에 1번째 인수는 requset, 2번째 인수는 response
 const server = http.createServer((req, res) => {
-  console.log(req);
+  console.log(req.url, req.method, req.headers);
+
+  // 이벤트 루프(현재는 서버)를 중지하는 메서드
+  // process.exit();
 });
 
 // listen 프로세스가 실행되면 종료시키지 않고 계속 실행해 요청을 지속적으로 모니터링할 수 있는 메서드
