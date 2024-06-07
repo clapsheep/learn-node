@@ -9,6 +9,8 @@ app.use((req, res, next) => {
 });
 app.use((req, res, next) => {
   console.log("In another middleware");
+
+  res.send("<h1>Hello from Express!</h1>"); // 서버로 부터 html을 응답 받음
 });
 const server = http.createServer(app);
 
