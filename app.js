@@ -1,16 +1,24 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("In the middleware");
-  next(); // 다음 미들웨어로 요청이 이동하려면 해당 next 함수를 실행해야한다.
-});
-app.use((req, res, next) => {
-  console.log("In another middleware");
+// form으로 전송 받은 body를 해석해주는 패키지
+app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use("/add-product", (req, res, next) => {
+  res.send(
+    '<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>'
+  ); // 서버로 부터 html을 응답 받음
+});
+
+app.use("/product", (req, res, next) => {
+  console.log(req.body);
+  res.redirect("/");
+});
+
+app.use("/", (req, res, next) => {
   res.send("<h1>Hello from Express!</h1>"); // 서버로 부터 html을 응답 받음
 });
-// const server = http.createServer(app);
-// server.listen(3000);
+
 app.listen(3000);
