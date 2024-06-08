@@ -1,11 +1,13 @@
 const path = require("path");
-const rootDir = require("../util/path");
 const express = require("express");
+
+const rootDir = require("../util/path");
+const adminData = require("./admin");
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "views", "shop.html"));
-  // __dirname : 현재경로, 그 다음 인수 하나 씩이 다음 경로 위치들을 나타냄
+  const products = adminData.products
+  res.render('shop', {prods: products, docTitle: 'Shop'})
 });
 
 module.exports = router;
